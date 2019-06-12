@@ -15,7 +15,7 @@ struct ListCardTitle : View {
     }
 }
 
-let images: [String] = (0..<5).map{i in "nice_v\(i)" }
+let images: [String] = (0..<5).map{i in "niice_v\(i)" }
 
 struct ListCard : View {
     
@@ -43,6 +43,28 @@ struct SectionHeading : View {
     }
 }
 
+struct FullPage : View {
+    
+    let title: String
+    let image: String
+    let bodyText: String
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            SectionHeading(title: title, image: image)
+                .frame(height: 200.0)
+                .cornerRadius(0)
+            
+            Text(bodyText)
+                .lineLimit(nil)
+                .padding(.all)
+
+            Spacer()
+            
+            }
+            .edgesIgnoringSafeArea(.all)
+    }
+}
 
 
 
@@ -50,9 +72,16 @@ struct SectionHeading : View {
 #if DEBUG
 struct ListCard_Previews : PreviewProvider {
     static var previews: some View {
-        ListCard()
-            .padding()
-            .previewLayout(.fixed(width: 300, height: 300))
+        Group {
+            ListCard()
+                .padding()
+                .previewLayout(.fixed(width: 300, height: 300))
+            
+            FullPage(
+                title: "My title",
+                image: images[2],
+                bodyText: "You may not like it, but this is the greatest body in the world.")
+        }
     }
 }
 #endif
