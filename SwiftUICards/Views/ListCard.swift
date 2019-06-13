@@ -51,6 +51,7 @@ struct SectionHeading : View {
             ListCardTitle(title: title)
                 .background(
                     Image(image)
+						.renderingMode(.original)
                         .resizable()
                         .aspectRatio(1, contentMode: .fill)
             )

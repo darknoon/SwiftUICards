@@ -6,10 +6,13 @@ struct ListView : View {
 			GeometryReader { geo in
 				ScrollView {
 					ForEach(0 ..< 5) { item in
-						ListCard(title: "Card \(item)")
-							.padding([.bottom, .leading, .trailing])
-							.frame(width: geo.size.width, height: geo.size.width * 1.333)
-							.shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.33), radius: 20, x: 0, y: 10)
+						NavigationButton(destination: FullPage(title: "Card 0", image: "niice_v1", content: .test0)) {
+							ListCard(title: "Card \(item)")
+								.padding([.bottom, .leading, .trailing])
+								.frame(width: geo.size.width, height: geo.size.width * 1.333)
+								.shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.33), radius: 20, x: 0, y: 10)
+							
+						}
 						
 					}
 				}
