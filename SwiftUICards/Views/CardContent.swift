@@ -1,37 +1,13 @@
-//
-//  Content.swift
-//  SwiftUICards
-//
-//  Created by Andrew Pouliot on 6/12/19.
-//  Copyright © 2019 Andrew Pouliot. All rights reserved.
-//
-
 import SwiftUI
 
-enum Block {
-    case h(title: String)
-    case p(body: String)
-}
 
+/// Allow Blocks to be used in an identifiable context
 extension Block : Identifiable {
     var id: String {
         switch self {
         case let .h(title): return title
         case let .p(body): return body
         }
-    }
-}
-
-struct Content {
-    let body: [Block]
-    
-    static var test0: Content {
-        return Content(body: [
-            .h(title: "Header"),
-            .p(body: """
-Hong Kong’s stock market fell 1.7 percent on Wednesday in an otherwise quiet trading day in Asia, as protesters filled up a main transportation artery where multinational companies and international banks occupy much of the gleaming skyscraper real estate. The police used tear gas on protesters Wednesday afternoon on the same streets and sidewalks that bankers and lawyers for some of the world’s biggest companies travel on their daily commutes. Employees at major banks like HSBC and accounting firms like Deloitte were told to work from home in anticipation of grinding traffic and concerns about safety.
-"""),
-            ])
     }
 }
 
@@ -51,13 +27,6 @@ struct HeadingView : View {
             .padding(.top)
     }
 }
-
-extension View {
-    func erased() -> AnyView {
-        return AnyView(self)
-    }
-}
-
 
 extension Block : View {
     var body: AnyView {

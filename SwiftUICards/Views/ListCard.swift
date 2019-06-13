@@ -33,7 +33,7 @@ let images: [String] = (0..<5).map{i in "niice_v\(i + 1)" }
 struct ListCard : View {
     
     let i: Int = 0
-    let title = "Section Name"
+    let title: String
     
     var body: some View {
         SectionHeading(title: title, image: images[i % images.count])
@@ -85,7 +85,7 @@ struct FullPage : View {
 struct ListCard_Previews : PreviewProvider {
     static var previews: some View {
         Group {
-            ListCard()
+            ListCard(title: "Steve is great")
                 .padding()
                 .previewLayout(.fixed(width: 300, height: 300))
             
