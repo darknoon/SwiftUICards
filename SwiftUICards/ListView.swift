@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ContentView : View {
+struct ListView : View {
     var body: some View {
         List(0 ..< 5) { item in
             ListCard()
@@ -19,7 +19,8 @@ struct ContentView : View {
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ListView()
+        
     }
 }
 #endif

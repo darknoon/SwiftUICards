@@ -1,21 +1,34 @@
 import SwiftUI
 
 struct ListCardTitle : View {
+    
+    enum CardSize {
+        case small
+        case large
+    }
+    
+    let cardSize: CardSize = .large
 
     let title: String
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(title)
-                .font(.title)
-                .fontWeight(.bold)
-                .color(.white)
-                .alignmentGuide(.lastTextBaseline, computeValue: { _ in 0.0 })
+        VStack {
+            Spacer()
+            HStack(alignment: .lastTextBaseline) {
+                Text(title)
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .color(.white)
+                    .padding()
+                    .opacity(0.7)
+                    .blendMode(.plusLighter)
+                Spacer()
+            }
         }
     }
 }
 
-let images: [String] = (0..<5).map{i in "niice_v\(i)" }
+let images: [String] = (0..<5).map{i in "niice_v\(i + 1)" }
 
 struct ListCard : View {
     
@@ -23,7 +36,7 @@ struct ListCard : View {
     let title = "Section Name"
     
     var body: some View {
-        SectionHeading(title: title, image: images[(i % images.count) + 1])
+        SectionHeading(title: title, image: images[i % images.count])
         .cornerRadius(10)
     }
 }
@@ -35,11 +48,14 @@ struct SectionHeading : View {
     
     var body: some View {
         ZStack {
-            Image(image)
-                .resizable()
-                .aspectRatio(1, contentMode: .fill)
             ListCardTitle(title: title)
-        }
+                .background(
+                    Image(image)
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fill)
+            )
+            }
+            .relativeWidth(1.0)
     }
 }
 
@@ -47,17 +63,16 @@ struct FullPage : View {
     
     let title: String
     let image: String
-    let bodyText: String
+    let content: Content
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: HorizontalAlignment.leading) {
             SectionHeading(title: title, image: image)
                 .frame(height: 200.0)
                 .cornerRadius(0)
             
-            Text(bodyText)
-                .lineLimit(nil)
-                .padding(.all)
+            
+            CardContentView(content: content)
 
             Spacer()
             
@@ -65,9 +80,6 @@ struct FullPage : View {
             .edgesIgnoringSafeArea(.all)
     }
 }
-
-
-
 
 #if DEBUG
 struct ListCard_Previews : PreviewProvider {
@@ -80,8 +92,17 @@ struct ListCard_Previews : PreviewProvider {
             FullPage(
                 title: "My title",
                 image: images[2],
-                bodyText: "You may not like it, but this is the greatest body in the world.")
+                content: Content.test0)
         }
     }
 }
 #endif
+
+struct ContentView : View {
+    
+    var body: some View {
+        return Text("oeuoeu")
+            .lineLimit(nil)
+            .padding(.all)
+    }
+}
